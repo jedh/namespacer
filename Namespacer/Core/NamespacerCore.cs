@@ -44,7 +44,7 @@ namespace Namespacer.Core
                     return false;
                 }
 
-                // Format the namespace.                
+                // Format the namespace.    
                 string namespaceStr = Util.GetNamespace(path, _namespacerSettings);
 
                 ScriptBuilder.BuildScript(filename, path, namespaceStr, isInterface);              

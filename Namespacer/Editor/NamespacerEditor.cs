@@ -44,6 +44,7 @@ public class NamespacerEditor : EditorWindow
             GUILayout.Label("Namespacer settings:", EditorStyles.boldLabel);
             _namespacerSettings.rootNamespace = EditorGUILayout.TextField("Root namespace: ", _namespacerSettings.rootNamespace);
             _namespacerSettings.rootFolder = EditorGUILayout.TextField("Root directory path: ", _namespacerSettings.rootFolder);
+            _namespacerSettings.shouldIgnoreHierarchy = GUILayout.Toggle(_namespacerSettings.shouldIgnoreHierarchy, "Ignore folder hierarchy");
             GUILayout.Label("");
         }
 
@@ -74,6 +75,7 @@ public class NamespacerEditor : EditorWindow
             {
                 _namespacerSettings.rootNamespace = EditorGUILayout.TextField("Root namespace: ", _namespacerSettings.rootNamespace);
                 _namespacerSettings.rootFolder = EditorGUILayout.TextField("Root directory path: ", _namespacerSettings.rootFolder);
+                _namespacerSettings.shouldIgnoreHierarchy = GUILayout.Toggle(_namespacerSettings.shouldIgnoreHierarchy, "Ignore folder hierarchy");
             }
         }
 

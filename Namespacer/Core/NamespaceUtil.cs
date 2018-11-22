@@ -16,16 +16,32 @@ namespace Namespacer.Core
 
         public static string GetNamespace(string path, NamespacerSettings namespacerSettings)
         {
-            string namespacePath = path;
+            string namespacePath = "";
             string rootNamespace = namespacerSettings.rootNamespace;
 
             if (rootNamespace == string.Empty)
             {
                 rootNamespace = PlayerSettings.productName;
             }
-
+           
             // Strip any whitespace out of the root namespace.
             rootNamespace = rootNamespace.Replace(" ", "");
+
+            if (namespacerSettings.shouldIgnoreHierarchy)
+            {
+                namespacePath = rootNamespace;
+            }
+            else
+            {
+                namespacePath = GetNamespaceFromHierarchy(path, rootNamespace, namespacerSettings.rootFolder);
+            }                      
+
+            return namespacePath;
+        }
+
+        private static string GetNamespaceFromHierarchy(string path, string rootNamespace, string rootFolder)
+        {
+            string namespacePath = path;
 
             // Get the root directory.
             // Check if Assets/ is at the start of the path, and remove it.
@@ -42,7 +58,7 @@ namespace Namespacer.Core
             }
 
             // Remove leading and trailing / from the root folders setting.
-            string rootFolderString = namespacerSettings.rootFolder;
+            string rootFolderString = rootFolder;
 
             // If we have a leading /, remove it.
             if (rootFolderString.IndexOf("/") == 0)
@@ -91,7 +107,7 @@ namespace Namespacer.Core
             if (namespacePath.IndexOf("/") == 0)
             {
                 namespacePath = namespacePath.Remove(0, 1);
-            }            
+            }
 
             if (namespacePath.Length > 0)
             {
@@ -107,7 +123,7 @@ namespace Namespacer.Core
             else
             {
                 namespacePath = rootNamespace;
-            }            
+            }
 
             return namespacePath;
         }

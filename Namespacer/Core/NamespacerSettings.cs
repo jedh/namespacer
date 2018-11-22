@@ -11,6 +11,8 @@ namespace Namespacer.Core
 
         public string rootFolder = "";
 
+        public bool shouldIgnoreHierarchy = false;
+
         public void Init()
         {
             rootNamespace = PlayerSettings.productName;
